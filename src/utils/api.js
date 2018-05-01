@@ -21,6 +21,29 @@ fetch(`${API}/posts`, {
   body: JSON.stringify(post)
 }).then(data => data.json());
 
+export const deletePost = postId => {
+  return fetch(`${API}/posts/${postId}`, {
+    method: "DELETE",
+    headers: { Authorization: "whatever-you-want" }
+  }).then(res => res);
+};
+
+export const editPost = (post, postId) => {
+  return fetch(`${API}/posts/${postId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: "whatever-you-want",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(post)
+  }).then(data => data.json());
+};
+
+export const getSinglePost = postId =>
+  fetch(`${API}/posts/${postId}`, {
+    headers: { Authorization: "whatever-you-want" }
+  }).then(res => res.json());
+
 export const getCommentsForPost = postId =>
 fetch(`${API}/posts/${postId}/comments`, { headers: { Authorization: "whatever-you-want" } }).then(response =>
   response.json().then(data => data)
@@ -33,5 +56,5 @@ export const postVote = (postId, option) =>
       Authorization: "whatever-you-want",
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ option })
+    body: JSON.stringify({option})
   }).then(res => res.json());

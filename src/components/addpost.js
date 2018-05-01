@@ -5,38 +5,16 @@ import uuidv1 from "uuid/v1";
 import serializeForm from 'form-serialize'
 
 class AddPost extends Component {
-  //State to keep track of the post details.
   state = {
     category: "react",
-    title: "",
-    author: "",
-    content: ""
+    // title: "",
+    // author: "",
+    // content: ""
   };
 
-  // handleInputChange = e => {
-  //   const value = e.target.value;
-  //   const name = e.target.name;
-
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   const data = {
-  //     id: uuidv1(),
-  //     timestamp: Date.now(),
-  //     title: this.state.postTitle,
-  //     body: this.state.postContent,
-  //     author: this.state.postAuthor,
-  //     category: this.state.postCategory,
-  //     deleted: false,
-  //     voteScore: 1
-  //   };
-  //   this.props.sendAddPost(data);
-  //   this.props.history.push("/");
-  // };
+  setCategory = (event) => {
+    this.setState({ category: event.target.value });
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -55,7 +33,7 @@ class AddPost extends Component {
           <input type="hidden"  name="voteScore" value="1"/>
           <label>
             Select a category:
-            <select name="category" value={this.state.value} onChange={this.handleChange}>
+            <select name="category" value={this.state.category} onChange={this.setCategory}>
               <option value="react">React</option>
               <option value="redux">Redux</option>
               <option value="udacity">Udacity</option>
@@ -69,11 +47,5 @@ class AddPost extends Component {
     );
   }
 }
-
-// const mapStateToProps = ({ }) => ({
-
-// });
-
-// export default connect(mapStateToProps, { sendAddPost} )(AddPost);
 
 export default connect(null, { sendAddPost })(AddPost);

@@ -21,6 +21,10 @@ class MainPage extends Component {
     this.props.changeSortAction({ value });
   }
 
+  deletePost = postId => {
+    this.props.sendDeletePost(postId);
+  };
+
   render() {
     const { posts } = this.props.posts;
     const { sort } = this.props.sort;
@@ -35,11 +39,6 @@ class MainPage extends Component {
         { posts && posts.length &&
           posts.filter(post => !post.deleted)
           .sort((a, b) => {
-
-
-              console.log('sort: ' + sort)
-
-
             switch (sort) {
               case "timestamp":
                 return b.timestamp - a.timestamp;
@@ -50,12 +49,15 @@ class MainPage extends Component {
           .map(post => (
 
             <li key={ post.id }>
+              <span>{post.category}</span><br/>
               <Link to={`/${post.category}/${post.id}`}>{ post.title }</Link><br/>
               { post.author }<br/>
               <Timestamp time={ post.timestamp / 1000 } format='full' /><br/>
               <button onClick={ () => this.voteUp(post.id) }>Up</button>
               { post.voteScore }
               <button onClick={ () => this.voteDown(post.id) }>Down</button>
+              <button onClick={ () => this.deletePost(post.id) }>Delete</button>
+              <Link to={`/editpost/${post.id}`}><button>Edit</button></Link>
             </li>
 
         ))}

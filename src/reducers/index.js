@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import {
   RECEIVE_POSTS,
   ADD_POST,
+  DELETE_POST,
   VOTE,
   CHANGE_SORT
 } from "../actions";
@@ -15,6 +16,14 @@ function posts(state = {}, action) {
         ...state,
         ...action.post
       };
+      case DELETE_POST:
+        const availablePosts = state.posts.filter(
+          item => item.id !== action.postId
+        );
+        return {
+          ...state,
+          posts: availablePosts
+        };
     case VOTE:
       const updatedPosts = state.posts.map(post => {
         if (post.id === action.payload.id) {

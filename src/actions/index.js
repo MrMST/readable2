@@ -2,6 +2,7 @@ import * as api from "../utils/api";
 
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const ADD_POST = "ADD_POST";
+export const DELETE_POST = "DELETE_POST";
 export const VOTE = "VOTE";
 export const CHANGE_SORT = "CHANGE_SORT";
 
@@ -32,6 +33,14 @@ export const addPost = (post) => ({
 
 export const sendAddPost = (post) => dispatch =>
   api.addPost(post).then(post => dispatch(addPost(post)));
+
+export const deletePost = (postId) => ({
+  type: DELETE_POST,
+  postId
+});
+
+export const sendDeletePost = postId => dispatch =>
+  api.deletePost(postId).then(post => dispatch(deletePost(postId)));
 
 export const votePost = post => ({
   type: VOTE,

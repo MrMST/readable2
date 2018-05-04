@@ -7,9 +7,9 @@ import serializeForm from 'form-serialize'
 class AddPost extends Component {
   state = {
     category: "react",
-    // title: "",
-    // author: "",
-    // content: ""
+     title: "",
+     author: "",
+     content: ""
   };
 
   setCategory = (event) => {
@@ -25,7 +25,8 @@ class AddPost extends Component {
 
   render() {
     return (
-      <div className="page-wrapper">
+      <div className="wrapper">
+        <div>Add Post</div>
         <form onSubmit={ this.handleSubmit }>
           <input type="hidden"  name="id" value={uuidv1()}/>
           <input type="hidden"  name="timestamp" value={Date.now()}/>
@@ -41,6 +42,7 @@ class AddPost extends Component {
           </label>
           <input type='text' name='title' placeholder='Title'/>
           <input type='text' name='author' placeholder='Author'/>
+          <textarea name='body' value={this.state.body}/>
           <button>Add Post</button>
         </form>
       </div>

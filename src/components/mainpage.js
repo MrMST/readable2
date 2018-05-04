@@ -29,7 +29,7 @@ class MainPage extends Component {
     const { posts } = this.props.posts;
     const { sort } = this.props.sort;
     return (
-      <div className="page-wrapper">
+      <div className="wrapper">
         <button onClick={ () => this.changeSorting('votescore') }>VoteScore</button>
         <button onClick={ () => this.changeSorting('timestamp') }>Timestamp</button>
         <hr/>

@@ -63,3 +63,16 @@ export const postVote = (postId, option) =>
     },
     body: JSON.stringify({option})
   }).then(res => res.json());
+
+  export const addComment = comment => {
+    const body = JSON.stringify(comment);
+
+    return fetch(`${API}/comments/`, {
+      method: "POST",
+      headers: {
+        Authorization: "whatever-you-want",
+        "Content-Type": "application/json"
+      },
+      body
+    }).then(response => response.json());
+  };

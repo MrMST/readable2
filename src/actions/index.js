@@ -62,6 +62,15 @@ export const getComments = comments => ({
   type: GET_COMMENTS,
   comments
 });
+
+export const addComment = comment => ({
+  type: ADD_COMMENT,
+  comment
+});
+
+export const fetchAddComment = comment => dispatch =>
+  api.addComment(comment).then(comment => dispatch(addComment(comment)));
+
 // export const receiveComments = postId => dispatch =>
 //   api.getCommentsForPost(postId).then(comments => dispatch(getComments(comments)));
 export const fetchComments = postId => dispatch =>

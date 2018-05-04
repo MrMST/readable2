@@ -53,11 +53,12 @@ class MainPage extends Component {
               <Link to={`/show/${post.id}`}>{ post.title }</Link><br/>
               { post.author }<br/>
               <Timestamp time={ post.timestamp / 1000 } format='full' /><br/>
+              <br/>--- Comment count {post.commentCount} <br/>
               <button onClick={ () => this.voteUp(post.id) }>Up</button>
               { post.voteScore }
               <button onClick={ () => this.voteDown(post.id) }>Down</button>
-              <button onClick={ () => this.deletePost(post.id) }>Delete</button>
-              <Link to={`/editpost/${post.id}`}><button>Edit</button></Link>
+              <button onClick={ () => this.deletePost(post.id) }>Delete Post</button>
+              <Link to={`/editpost/${post.id}`}><button>Edit Post</button></Link>
             </li>
 
         ))}

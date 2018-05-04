@@ -43,7 +43,7 @@ class AddPost extends Component {
           <input type='text' name='title' placeholder='Title'/>
           <input type='text' name='author' placeholder='Author'/>
           <textarea name='body' value={this.state.body}/>
-          <button>Add Post</button>
+          <button>Save Post</button>
         </form>
       </div>
     );

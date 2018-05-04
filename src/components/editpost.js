@@ -69,7 +69,7 @@ class EditPost extends Component {
           <input type='text' name='title' value={this.state.title} onChange={this.handleInputChange}/>
           <input type='text' name='author' value={this.state.author}  onChange={this.handleInputChange}/>
           <textarea name='content' value={this.state.content}  onChange={this.handleInputChange}/>
-          <button>Edit Post</button>
+          <button>Save Post</button>
         </form>
       </div>
     );

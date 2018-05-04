@@ -16,7 +16,6 @@ import {
 } from "../actions";
 
 function posts(state = {}, action) {
-  console.log('in posts type:' + action.type)
   switch (action.type) {
     case RECEIVE_POSTS:
       return { ...state, posts: action.posts };
@@ -54,7 +53,6 @@ function posts(state = {}, action) {
 }
 
 function comments(state = {}, action) {
-  console.log('in comments type:' + action.type)
   switch (action.type) {
     case GET_COMMENTS:
       return { ...state, comments: action.comments };

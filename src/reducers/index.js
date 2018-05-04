@@ -3,12 +3,12 @@ import {
   RECEIVE_POSTS,
   ADD_POST,
   EDIT_POST,
+  EDIT_COMMENT,
   GET_SINGLE_POST,
   DELETE_POST,
   VOTE,
   CHANGE_SORT,
   DELETE_COMMENT,
-  EDIT_COMMENT,
   GET_COMMENT,
   GET_COMMENTS,
   ADD_COMMENT,
@@ -47,6 +47,15 @@ function posts(state = {}, action) {
         ...state,
         posts: updatedPosts
       };
+    default:
+      return state;
+  }
+}
+
+function receiveComment(state = {}, action) {
+  switch (action.type) {
+    case GET_COMMENT:
+      return action.comments;
     default:
       return state;
   }
@@ -99,5 +108,6 @@ function sort(state = { sort: "timestamp" }, action) {
 export default combineReducers({
   posts,
   comments,
+  receiveComment,
   sort
 });

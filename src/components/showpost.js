@@ -91,6 +91,7 @@ class ShowPost extends Component {
                       <div>{comment.body}</div>
                       <Timestamp time={ comment.timestamp / 1000 } format='full' />
                       <div>Score {comment.voteScore}</div>
+                      <Link to={`/editcomment/${comment.id}`}><button>Edit Comment</button></Link>
                       <button onClick={ () => this.deleteComment(comment.id) }>Delete Comment</button>
                     </div>
                   ))

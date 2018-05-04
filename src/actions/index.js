@@ -68,6 +68,14 @@ export const addComment = comment => ({
   comment
 });
 
+export const receiveComment = comments => ({
+  type: GET_COMMENT,
+  comments
+});
+
+export const fetchComment = commentId => dispatch =>
+  api.getSingleComment(commentId).then(comments => dispatch(receiveComment(comments)));
+
 export const fetchAddComment = comment => dispatch =>
   api.addComment(comment).then(comment => dispatch(addComment(comment)));
 
@@ -88,6 +96,15 @@ export const receiveSinglePost = posts => ({
   type: GET_SINGLE_POST,
   posts
 });
+
+export const editComment = (comment, commentId) => ({
+  type: EDIT_COMMENT,
+  comment,
+  commentId
+});
+
+export const sendEditComment = (comment, commentId) => dispatch =>
+  api.editComment(comment, commentId).then(comment => dispatch(editComment(comment)));
 
 export const getSinglePost = postId => dispatch =>
   api.getSinglePost(postId).then(posts => dispatch(receiveSinglePost(posts)));

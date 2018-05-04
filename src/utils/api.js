@@ -44,6 +44,11 @@ export const getSinglePost = postId =>
     headers: { Authorization: "whatever-you-want" }
   }).then(res => res.json());
 
+export const getSingleComment = commentId =>
+  fetch(`${API}/comments/${commentId}`,{
+    headers: { Authorization: "whatever-you-want" }
+  }).then(res => res.json().then(data => data)
+);
 
 export const getComments = postId =>
 fetch(`${API}/posts/${postId}/comments`, { headers: { Authorization: "whatever-you-want" } }).then(response =>
@@ -82,4 +87,15 @@ export const postVote = (postId, option) =>
       method: "DELETE",
       headers: { Authorization: "whatever-you-want" }
     }).then(response => response.json());
+  };
+
+  export const editComment = (comment, commentId) => {
+    return fetch(`${API}/comments/${commentId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: "whatever-you-want",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(comment)
+    }).then(data => data.json());
   };

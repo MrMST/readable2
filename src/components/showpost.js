@@ -1,34 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+//import * as actions from "../actions";
 import Timestamp from "react-timestamp";
 import {
   getSinglePost,
-  fetchComments
+  fetchComments,
+  sendDeletePost
 } from "../actions";
 
 class ShowPost extends Component {
 
   componentDidMount() {
     this.props.getPost(this.props.match.params.post_id);
-    // this.props.getPost(post_id).then(() => {
-    //     const { id, title, author, body, category, voteScore } = this.props.posts.posts[0];
-    //     this.setState({
-    //       id: id,
-    //       title: title,
-    //       author: author,
-    //       content: body,
-    //       category: category,
-    //       voteScore: voteScore
-    //     });
-    // });
   }
+
+  deletePost = postId => {
+    this.props.deletePost(postId);
+    this.props.history.push("/");
+  };
 
   render() {
     const { posts } = this.props.posts;
-
-    console.log(this.props)
-
     const { comments } = this.props.comments;
 
     return (
@@ -44,6 +37,7 @@ class ShowPost extends Component {
               <textarea name='content' value={post.body} readOnly/>
               <Timestamp time={ post.timestamp / 1000 } format='full' />
               <div> --- Score { post.voteScore } --- </div>
+              <button onClick={ () => this.deletePost(post.id) }>Delete Post</button>
               <div className="comments-wrapper">
                 {
                   comments && comments.length && comments.filter ( comment => !comment.deleted ).
@@ -72,11 +66,10 @@ const mapStateToProps = ({ posts, comments }) => ({
 
 const mapDispatchToProps = dispatch => ({
   getPost: postId =>
-  //dispatch(getSinglePost(postId))
-  //dispatch(fetchComments(postId)),
     dispatch(getSinglePost(postId)).then(() =>
       dispatch(fetchComments(postId))
     ),
+    deletePost: postId => dispatch(sendDeletePost(postId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowPost);

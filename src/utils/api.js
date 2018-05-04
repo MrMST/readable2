@@ -44,10 +44,15 @@ export const getSinglePost = postId =>
     headers: { Authorization: "whatever-you-want" }
   }).then(res => res.json());
 
-export const getCommentsForPost = postId =>
+
+export const getComments = postId =>
 fetch(`${API}/posts/${postId}/comments`, { headers: { Authorization: "whatever-you-want" } }).then(response =>
   response.json().then(data => data)
 );
+// export const getCommentsForPost = postId =>
+// fetch(`${API}/posts/${postId}/comments`, { headers: { Authorization: "whatever-you-want" } }).then(response =>
+//   response.json().then(data => data)
+// );
 
 export const postVote = (postId, option) =>
   fetch(`${API}/posts/${postId}`, {

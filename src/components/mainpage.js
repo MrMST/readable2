@@ -50,7 +50,7 @@ class MainPage extends Component {
 
             <li key={ post.id }>
               <span>{post.category}</span><br/>
-              <Link to={`/${post.category}/${post.id}`}>{ post.title }</Link><br/>
+              <Link to={`/show/${post.id}`}>{ post.title }</Link><br/>
               { post.author }<br/>
               <Timestamp time={ post.timestamp / 1000 } format='full' /><br/>
               <button onClick={ () => this.voteUp(post.id) }>Up</button>

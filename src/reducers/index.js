@@ -6,10 +6,17 @@ import {
   GET_SINGLE_POST,
   DELETE_POST,
   VOTE,
-  CHANGE_SORT
+  CHANGE_SORT,
+  DELETE_COMMENT,
+  EDIT_COMMENT,
+  GET_COMMENT,
+  GET_COMMENTS,
+  ADD_COMMENT,
+  VOTE_COMMENT
 } from "../actions";
 
 function posts(state = {}, action) {
+  console.log('in posts type:' + action.type)
   switch (action.type) {
     case RECEIVE_POSTS:
       return { ...state, posts: action.posts };
@@ -46,6 +53,39 @@ function posts(state = {}, action) {
   }
 }
 
+function comments(state = {}, action) {
+  console.log('in comments type:' + action.type)
+  switch (action.type) {
+    case GET_COMMENTS:
+      return { ...state, comments: action.comments };
+    case VOTE_COMMENT:
+      const updatedComments = state.comments.map(item => {
+        if (item.id === action.commentId.id) {
+          item.voteScore = action.commentId.voteScore;
+        }
+        return item;
+      });
+      return {
+        ...state,
+        comments: updatedComments
+      };
+    case DELETE_COMMENT:
+      const availableComments = state.comments.filter(
+        item => item.id !== action.commentId
+      );
+      return {
+        ...state,
+        comments: availableComments
+      };
+    case ADD_COMMENT:
+      return { ...state, comments: state.comments.concat(action.comment) };
+    case EDIT_COMMENT:
+      return { ...state, ...action.comment };
+    default:
+      return state;
+  }
+}
+
 function sort(state = { sort: "timestamp" }, action) {
   switch (action.type) {
     case CHANGE_SORT:
@@ -60,5 +100,6 @@ function sort(state = { sort: "timestamp" }, action) {
 
 export default combineReducers({
   posts,
+  comments,
   sort
 });

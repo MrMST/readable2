@@ -76,3 +76,10 @@ export const postVote = (postId, option) =>
       body
     }).then(response => response.json());
   };
+
+  export const deleteComment = commentId => {
+    return fetch(`${API}/comments/${commentId}`, {
+      method: "DELETE",
+      headers: { Authorization: "whatever-you-want" }
+    }).then(response => response.json());
+  };

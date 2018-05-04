@@ -8,6 +8,7 @@ import {
   getSinglePost,
   fetchComments,
   fetchAddComment,
+  fetchDeleteComment,
   sendDeletePost
 } from "../actions";
 
@@ -29,6 +30,10 @@ class ShowPost extends Component {
   deletePost = postId => {
     this.props.deletePost(postId);
     this.props.history.push("/");
+  };
+
+  deleteComment = commentId => {
+    this.props.deleteComment(commentId);
   };
 
   handleInputChange = event => {
@@ -86,6 +91,7 @@ class ShowPost extends Component {
                       <div>{comment.body}</div>
                       <Timestamp time={ comment.timestamp / 1000 } format='full' />
                       <div>Score {comment.voteScore}</div>
+                      <button onClick={ () => this.deleteComment(comment.id) }>Delete Comment</button>
                     </div>
                   ))
                 }
@@ -123,8 +129,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getSinglePost(postId)).then(() =>
       dispatch(fetchComments(postId))
     ),
-    deletePost: postId => dispatch(sendDeletePost(postId)),
-    addComment: comment => dispatch(fetchAddComment(comment)),
+  deletePost: postId => dispatch(sendDeletePost(postId)),
+  addComment: comment => dispatch(fetchAddComment(comment)),
+  deleteComment: commentId => dispatch(fetchDeleteComment(commentId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowPost);

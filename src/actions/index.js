@@ -71,6 +71,14 @@ export const addComment = comment => ({
 export const fetchAddComment = comment => dispatch =>
   api.addComment(comment).then(comment => dispatch(addComment(comment)));
 
+export const deleteComment = commentId => ({
+  type: DELETE_COMMENT,
+  commentId
+});
+
+export const fetchDeleteComment = commentId => dispatch =>
+  api.deleteComment(commentId).then(comment => dispatch(deleteComment(commentId)));
+
 // export const receiveComments = postId => dispatch =>
 //   api.getCommentsForPost(postId).then(comments => dispatch(getComments(comments)));
 export const fetchComments = postId => dispatch =>

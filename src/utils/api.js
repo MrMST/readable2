@@ -112,3 +112,15 @@ export const postVote = (postId, option) =>
       })
     }).then(data => data.json());
   };
+
+  export const getAllCategories = () =>
+    fetch(`${API}/categories`, {
+      headers: { Authorization: "whatever-you-want" }
+    })
+    .then(res => res.json())
+    .then(data => data.categories);
+
+  export const getPostsForCategory = (category) =>
+    fetch(`${API}/${category}/posts`, {
+      headers: { Authorization: "whatever-you-want" }
+    }).then(data => data.json());

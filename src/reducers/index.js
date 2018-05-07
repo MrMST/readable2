@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import {
-  RECEIVE_POSTS,
   ADD_POST,
   EDIT_POST,
   EDIT_COMMENT,
@@ -12,7 +11,10 @@ import {
   GET_COMMENT,
   GET_COMMENTS,
   ADD_COMMENT,
-  VOTE_COMMENT
+  VOTE_COMMENT,
+  RECEIVE_POSTS,
+  RECEIVE_CATEGORIES,
+  GET_POSTS_CATEGORY
 } from "../actions";
 
 function posts(state = {}, action) {
@@ -47,6 +49,8 @@ function posts(state = {}, action) {
         ...state,
         posts: updatedPosts
       };
+    case GET_POSTS_CATEGORY:
+    return { ...state, posts: action.posts };
     default:
       return state;
   }
@@ -56,6 +60,16 @@ function receiveComment(state = {}, action) {
   switch (action.type) {
     case GET_COMMENT:
       return action.comments;
+    default:
+      return state;
+  }
+}
+
+function categories(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_CATEGORIES:
+      return { ...state, categories: action.categories };
+      //return action.categories;
     default:
       return state;
   }
@@ -107,6 +121,7 @@ function sort(state = { sort: "timestamp" }, action) {
 
 export default combineReducers({
   posts,
+  categories,
   comments,
   receiveComment,
   sort

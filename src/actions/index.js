@@ -13,6 +13,8 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const VOTE = "VOTE";
 export const CHANGE_SORT = "CHANGE_SORT";
 export const VOTE_COMMENT = "VOTE_COMMENT";
+export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
+export const GET_POSTS_CATEGORY = "GET_POSTS_CATEGORY";
 
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -131,3 +133,34 @@ export const changeSortAction = sort => {
     value: sort.value
   };
 };
+
+export const receiveCategories = categories => ({
+  type: RECEIVE_CATEGORIES,
+  categories
+});
+
+export const fetchCategories = () => dispatch =>
+  api
+    .getAllCategories()
+    .then(categories => dispatch(receiveCategories(categories)));
+
+export const getPostsCategory = posts => ({
+  type: GET_POSTS_CATEGORY,
+  posts
+});
+
+export const getPostsByCategory = category => dispatch =>
+  api
+    .getPostsForCategory(category)
+    .then(posts =>
+      Promise.all(
+        posts.map(post =>
+          api
+            .getComments(post.id)
+            .then(comments => (post.comments = comments))
+            .then(() => post)
+        )
+      )
+    )
+    .then(posts => dispatch(getPostsCategory(posts)));
+

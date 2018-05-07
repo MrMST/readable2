@@ -36,6 +36,7 @@ class ShowCategoryPosts extends Component {
     const { sort } = this.props.sort;
     return (
       <div className="wrapper">
+      <div>Category Posts</div>
         <ul>
           {
           categories && categories.categories && categories.categories.length && categories.categories.map( category =>(

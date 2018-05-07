@@ -32,6 +32,7 @@ class MainPage extends Component {
     const { sort } = this.props.sort;
     return (
       <div className="wrapper">
+      <div>Main Page</div>
         <ul>
           {
           categories && categories.categories && categories.categories.length && categories.categories.map( category =>(

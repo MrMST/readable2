@@ -41,7 +41,7 @@ class MainPage extends Component {
         </ul>
         <button onClick={ () => this.changeSorting('votescore') }>VoteScore</button>
         <button onClick={ () => this.changeSorting('timestamp') }>Timestamp</button>
-        <hr/>
+
         <Link to="/addpost"><button>Add Post</button></Link>
         <div className="post-container">
         <ul>

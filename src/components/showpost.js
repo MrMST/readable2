@@ -9,7 +9,9 @@ import {
   fetchComments,
   fetchAddComment,
   fetchDeleteComment,
-  sendDeletePost
+  sendVoteComment,
+  sendDeletePost,
+  sendVotePost
 } from "../actions";
 
 class ShowPost extends Component {
@@ -32,8 +34,24 @@ class ShowPost extends Component {
     this.props.history.push("/");
   };
 
+  voteUp = (postId) => {
+    this.props.votePost(postId, "upVote");
+  };
+
+  voteDown = (postId) => {
+    this.props.votePost(postId, "downVote");
+  };
+
   deleteComment = commentId => {
     this.props.deleteComment(commentId);
+  };
+
+  voteCommentUp = (commentId) => {
+    this.props.voteComment(commentId, "upVote");
+  };
+
+  voteCommentDown = (commentId) => {
+    this.props.voteComment(commentId, "downVote");
   };
 
   handleInputChange = event => {
@@ -79,7 +97,11 @@ class ShowPost extends Component {
               <input type='text' name='author' value={post.author} readOnly/>
               <textarea name='content' value={post.body} readOnly/>
               <Timestamp time={ post.timestamp / 1000 } format='full' />
-              <div> Score { post.voteScore } </div>
+              <div>
+                <button onClick={ () => this.voteUp(post.id) }>Up</button>
+                Score { post.voteScore }
+                <button onClick={ () => this.voteDown(post.id) }>Down</button>
+              </div>
               <div> Comment count {post.commentCount} </div>
               <button onClick={ () => this.deletePost(post.id) }>Delete Post</button>
               <Link to={`/editpost/${post.id}`}><button>Edit Post</button></Link>
@@ -90,7 +112,11 @@ class ShowPost extends Component {
                       <div>{comment.author}</div>
                       <div>{comment.body}</div>
                       <Timestamp time={ comment.timestamp / 1000 } format='full' />
-                      <div>Score {comment.voteScore}</div>
+                      <div>
+                        <button onClick={ () => this.voteCommentUp(comment.id) }>Up</button>
+                        Score {comment.voteScore}
+                        <button onClick={ () => this.voteCommentDown(comment.id) }>Down</button>
+                      </div>
                       <Link to={`/editcomment/${comment.id}`}><button>Edit Comment</button></Link>
                       <button onClick={ () => this.deleteComment(comment.id) }>Delete Comment</button>
                     </div>
@@ -131,8 +157,11 @@ const mapDispatchToProps = dispatch => ({
       dispatch(fetchComments(postId))
     ),
   deletePost: postId => dispatch(sendDeletePost(postId)),
+  votePost: (postId, option) => dispatch(sendVotePost(postId, option)),
   addComment: comment => dispatch(fetchAddComment(comment)),
   deleteComment: commentId => dispatch(fetchDeleteComment(commentId)),
+  voteComment: (commentId, option) =>
+    dispatch(sendVoteComment(commentId, option)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowPost);

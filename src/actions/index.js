@@ -92,6 +92,14 @@ export const fetchDeleteComment = commentId => dispatch =>
 export const fetchComments = postId => dispatch =>
   api.getComments(postId).then(comments => dispatch(getComments(comments)));
 
+  export const voteComment = (commentId, option) => ({
+    type: VOTE_COMMENT,
+    commentId
+  });
+
+export const sendVoteComment = (commentId, option) => dispatch =>
+  api.voteComment(commentId, option).then(comment => dispatch(voteComment(comment)));
+
 export const receiveSinglePost = posts => ({
   type: GET_SINGLE_POST,
   posts

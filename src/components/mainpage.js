@@ -1,8 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchCategories, getPosts, sendVotePost, sendDeletePost, changeSortAction } from "../actions";
-import Timestamp from "react-timestamp";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import Timestamp from "react-timestamp"
+import {
+  fetchCategories,
+  getPosts,
+  sendVotePost,
+  sendDeletePost,
+  changeSortAction
+} from "../actions"
 
 class MainPage extends Component {
   componentDidMount() {

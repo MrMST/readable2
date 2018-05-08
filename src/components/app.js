@@ -6,7 +6,7 @@ import EditPost from "../components/editpost"
 import EditComment from "../components/editcomment"
 import ShowPost from "../components/showpost"
 import ShowCategoryPosts from "../components/categories"
-import "../App.css";
+import "../App.css"
 
 class App extends Component {
   render() {

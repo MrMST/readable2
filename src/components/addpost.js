@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { sendAddPost } from "../actions";
-import uuidv1 from "uuid/v1";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { sendAddPost } from "../actions"
+import uuidv1 from "uuid/v1"
 import serializeForm from 'form-serialize'
-import { fetchCategories } from "../actions";
+import { fetchCategories } from "../actions"
 
 class AddPost extends Component {
   state = {
@@ -29,11 +29,7 @@ class AddPost extends Component {
   }
 
   render() {
-
     const { categories} = this.props.categories
-
-    console.log(categories)
-
     return (
       <div className="wrapper">
         <div>Add Post</div>
@@ -45,15 +41,9 @@ class AddPost extends Component {
           <label>
             Select a category:
             <select name="category" value={this.state.category} onChange={this.setCategory}>
-
-              {
-                categories && categories.length && categories.map( category => (
-                  <option value={ category.name }>{ category.name }</option>
-                ))}
-              {/* <option value="react">React</option>
-              <option value="redux">Redux</option>
-              <option value="udacity">Udacity</option> */}
-
+            { categories && categories.length && categories.map( category => (
+                <option value={ category.name }>{ category.name }</option>
+            ))}
             </select>
           </label>
           <input type='text' name='title' placeholder='Title'/>

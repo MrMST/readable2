@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import uuidv1 from "uuid/v1";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import uuidv1 from "uuid/v1"
 import serializeForm from 'form-serialize'
-import Timestamp from "react-timestamp";
+import Timestamp from "react-timestamp"
 import {
   getSinglePost,
   fetchComments,
@@ -12,13 +12,13 @@ import {
   sendVoteComment,
   sendDeletePost,
   sendVotePost
-} from "../actions";
+} from "../actions"
 
 class ShowPost extends Component {
 
   state = {
-    commentBody: "",
-    commentAuthor: ""
+    author: "",
+    body: ""
   };
 
   componentDidMount() {
@@ -68,14 +68,6 @@ class ShowPost extends Component {
     event.preventDefault();
     const values = serializeForm(event.target, { hash: true })
     this.props.addComment(values);
-
-
-    // const { author, body } = this.state;
-    // const data = {
-    //   author: author,
-    //   body: body
-    // };
-    // this.props.addComment(data, data.id);
     this.setState({
       author: "",
       body: ""
@@ -92,10 +84,10 @@ class ShowPost extends Component {
         {
           posts && posts.length === 1 && posts.filter( post => !post.deleted).map(post => (
             <div key={post.id}>
-              <input type='text' name='category' value={post.category} readOnly/>
-              <input type='text' name='title' value={post.title} readOnly/>
-              <input type='text' name='author' value={post.author} readOnly/>
-              <textarea name='content' value={post.body} readOnly/>
+              <input type='text' name='pCategory' value={post.category} readOnly/>
+              <input type='text' name='pTitle' value={post.title} readOnly/>
+              <input type='text' name='pAuthor' value={post.author} readOnly/>
+              <textarea name='pContent' value={post.body} readOnly/>
               <Timestamp time={ post.timestamp / 1000 } format='full' />
               <div>
                 <button onClick={ () => this.voteUp(post.id) }>Up</button>

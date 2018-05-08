@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "redux"
 import {
   ADD_POST,
   EDIT_POST,
@@ -15,7 +15,7 @@ import {
   RECEIVE_POSTS,
   RECEIVE_CATEGORIES,
   GET_POSTS_CATEGORY
-} from "../actions";
+} from "../actions"
 
 function posts(state = {}, action) {
   switch (action.type) {

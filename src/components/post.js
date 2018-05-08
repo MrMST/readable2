@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import { connect } from "react-redux"
-import { sendVotePost, sendDeletePost } from "../actions";
-import Timestamp from "react-timestamp";
+import {
+  sendVotePost,
+  sendDeletePost
+} from "../actions"
+import Timestamp from "react-timestamp"
 
 class Post extends Component {
 

@@ -78,12 +78,16 @@ class ShowPost extends Component {
     const { posts } = this.props.posts;
     const { comments } = this.props.comments;
 
+    console.log(posts)
+
     return (
       <div className="posts-wrapper">
         <div>Show Post</div>
         {
-          posts && posts.length === 1 && posts.filter( post => !post.deleted).map(post => (
-            <div key={post.id}>
+          posts && posts.length && Object.keys(posts[0]).length && !posts[0].error ? (<div>
+            {
+              posts.filter( post => !post.deleted).map(post => (
+                <div key={post.id}>
               <input type='text' name='pCategory' value={post.category} readOnly/>
               <input type='text' name='pTitle' value={post.title} readOnly/>
               <input type='text' name='pAuthor' value={post.author} readOnly/>
@@ -130,7 +134,9 @@ class ShowPost extends Component {
                 </div>
               </div>
             </div>
-          ))
+              ))
+            }
+            </div>) : (<div>Post not found! 404 <Link to={"/"} key="back">Back</Link></div>)
         }
       </div>
     );

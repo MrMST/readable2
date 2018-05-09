@@ -44,8 +44,8 @@ class ShowCategoryPosts extends Component {
       <div className="wrapper">
       <div>Category Posts</div>
         <ul>
-          {
-          categories && categories.categories && categories.categories.length && categories.categories.map( category =>(
+          <li><Link to={"/"} key="all"><button>All</button></Link></li>
+          { categories && categories.categories && categories.categories.length && categories.categories.map( category =>(
             <li key={category.name}>
               <Link to={`/${category.path}`}><button onClick={() => this.getPostsByCategory(category.name)}>{ category.name }</button></Link>
             </li>

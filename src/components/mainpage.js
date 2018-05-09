@@ -40,6 +40,7 @@ class MainPage extends Component {
       <div className="wrapper">
       <div>Main Page</div>
         <ul>
+          <li><Link to={"/"} key="all"><button>All</button></Link></li>
           {
           categories && categories.categories && categories.categories.length && categories.categories.map( category =>(
             <li key={category.name}><Link to={`/${category.path}`}><button>{ category.name }</button></Link></li>

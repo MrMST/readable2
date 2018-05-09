@@ -8,9 +8,9 @@ import { fetchCategories } from "../actions"
 class AddPost extends Component {
   state = {
     category: "react",
-     title: "",
-     author: "",
-     content: ""
+    // title: "",
+    // author: "",
+    // body: ""
   };
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class AddPost extends Component {
             Select a category:
             <select name="category" value={this.state.category} onChange={this.setCategory}>
             { categories && categories.length && categories.map( category => (
-                <option value={ category.name }>{ category.name }</option>
+                <option key={ category.name } value={ category.name }>{ category.name }</option>
             ))}
             </select>
           </label>
@@ -60,7 +60,6 @@ const mapStateToProps = ({ categories }) => ({
   categories
 });
 
-export default connect(mapStateToProps, {
-  sendAddPost,
-  fetchCategories
-})(AddPost);
+export default connect(mapStateToProps, { sendAddPost, fetchCategories })(
+  AddPost
+);

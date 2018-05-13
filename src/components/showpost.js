@@ -83,6 +83,7 @@ class ShowPost extends Component {
     return (
       <div className="posts-wrapper">
         <div>Show Post</div>
+        <div><Link to={"/"} key="back">Back</Link></div>
         {
           posts && posts.length && Object.keys(posts[0]).length && !posts[0].error ? (<div>
             {
@@ -91,7 +92,6 @@ class ShowPost extends Component {
               <input type='text' name='pCategory' value={post.category} readOnly/>
               <input type='text' name='pTitle' value={post.title} readOnly/>
               <input type='text' name='pAuthor' value={post.author} readOnly/>
-              <textarea name='pContent' value={post.body} readOnly/>
               <Timestamp time={ post.timestamp / 1000 } format='full' />
               <div>
                 <button onClick={ () => this.voteUp(post.id) }>Up</button>
@@ -100,7 +100,8 @@ class ShowPost extends Component {
               </div>
               <div> Comment count {post.commentCount} </div>
               <button onClick={ () => this.deletePost(post.id) }>Delete Post</button>
-              <Link to={`/editpost/${post.id}`}><button>Edit Post</button></Link>
+              <Link to={`/editpost/${post.id}`}><button>Edit Post</button></Link><br/>
+              <textarea name='pContent' value={post.body} readOnly/>
               <div className="comments-wrapper">
                 {
                   comments && comments.length && comments.filter ( comment => !comment.deleted ).map( comment => (
@@ -129,7 +130,7 @@ class ShowPost extends Component {
 
                     <input type='text' name='author' value={this.state.author} onChange={this.handleInputChange}/>
                     <textarea name='body' value={this.state.body}  onChange={this.handleInputChange}/>
-                    <button>Save Comment</button>
+                    <button>Add Comment</button>
                   </form>
                 </div>
               </div>

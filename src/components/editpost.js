@@ -67,6 +67,7 @@ class EditPost extends Component {
               posts.filter( post => !post.deleted).map(post => (
                 <div key={post.id}>
                   <div>Edit Post</div>
+                  <div><Link to={"/"} key="back">Back</Link></div>
                     <form onSubmit={ this.handleSubmit }>
                     <label>
                         Select a category:

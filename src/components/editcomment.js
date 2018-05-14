@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom"
 import { sendEditComment, fetchComment } from "../actions";
 
 class EditComment extends Component {
@@ -45,6 +46,7 @@ class EditComment extends Component {
       return (
         <div className="wrapper">
           <div>Edit Comment</div>
+          <div><Link to={"/"} key="back">Back</Link></div>
           <form onSubmit={ this.handleSubmit }>
             <input type='text' name='author' value={this.state.author} onChange={this.handleInputChange}/>
             <textarea name='content' value={this.state.content}  onChange={this.handleInputChange}/>
